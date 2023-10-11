@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+
+function secondsToTime(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    var s = Math.floor(seconds % 60);
+        
+    var dDisplay = d > 0 ? d + (d == 1 ? " Tag, " : " Tage, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? "h, " : "h, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? "min" : "min") : "";
+    return  dDisplay + hDisplay + mDisplay ;
+}
+
+new Chart("myChart", {
+    type: 'bar',
+    options: {
+        legend: { display: false },
+        indexAxis: 'x',
+        title: {
+            display: true,
+            text: 'Verbrachte Zeit pro Standorttyp'
+        },
+        scales:{
+            yAxes: [{
+                display: true,
+                ticks: {
+                    maxTicksLimit: 10,
+                    callback: function(label, index, labels) {
+                        return Math.floor(label / (3600*24))+' Tage';
+                    },
+                },
+
+
+            }]
+        },
+
+        tooltips: {
+            callbacks: {
+              title: function(tooltipItem, data) {
+                return data['labels'][tooltipItem[0]['index']];
+              },
+              label: function(tooltipItem, data) {
+                sec = data['datasets'][0]['data'][tooltipItem['index']];
+                time = secondsToTime(sec)
+                return 'Verbrachte Zeit: ' + time;
+              },
+            },
+    
+        },
+    },
+
+    data: {
+        labels: {{labels | safe}},
+        datasets: [
+            {
+                label: "Verbrachte Zeit pro Standorttyp",
+                backgroundColor: {{barColors | safe}},
+                data:  {{values | safe}}
+            }
+        ]
+    }  
+});
+
+
+
+</script>
+
+</body>
+</html>

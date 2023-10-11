@@ -1,0 +1,659 @@
+
+<link href=" https://cdn.jsdelivr.net/npm/intro.js@7.0.1/minified/introjs.min.css " rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  //this variable needs to be adjusted depending on where the server is hosted
+  // example (local):
+  let HOST = "http://127.0.0.1:5000"
+  // hosting in on a server:
+  //let HOST = <name of HOST Adress>
+
+
+
+
+
+
+</script>
+<style>
+
+  body{
+    background-color: #0a1628 ! important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"!important;
+  }
+  nav#main{
+    background-color: #0a1628;
+    box-shadow: rgba(134, 85, 255, 0.2) 0px 0px 50px;
+
+  }
+
+  .container-fluid{
+    height: 100vh !important;
+    width: 100vw !important;
+    padding: 0px !important;
+
+  }
+
+
+  .card{
+    background-color: #0a1628 !important;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-color: #374553 !important;
+
+  }
+
+  .card:hover{
+    border-color:#956eff !important;
+  }
+
+  .card:selection{
+    border-color:#956eff !important;
+  }
+
+  .card-title{
+    color:#8655ff;
+    font-size: 1.5rem;
+    line-height:1.1;
+    letter-spacing: .01em;
+  }
+  .card-text{
+    color:white;
+    font-size: 1rem;
+    line-height:1.4;
+    letter-spacing: .01em;
+    font-weight: inherit;
+  }
+
+
+
+  #myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
+
+  .modal {
+    color: #573b8a !important;
+  }
+
+
+  .row>.col>nav>.collapse>ul {
+    margin-top: 12px !important;
+  }
+
+  .row {
+    width: 100% !important;
+    margin: 0px !important;
+    /*height: fit-content;*/
+  }
+
+  .col {
+    padding: 0px !important;
+  }
+
+  .metacard {
+    padding: 20px !important;
+    font-size: larger !important;
+
+  }
+
+  .metacard>table>tbody>tr:nth-child(2n+1) {
+    color: #a079e8 !important;
+    font-weight: bold !important;
+    border-bottom-width: 2px !important;
+    border-color: #573b8a !important;
+  }
+
+  .metacard>table>tbody {
+    font-size: larger !important;
+    border-spacing: 10px !important;
+
+  }
+
+  .metacard>table>tbody>tr>td {
+    margin-right: 10px !important;
+    padding: 5px;
+    vertical-align: top;
+    text-align: left;
+    font-size: 12pt;
+
+  }
+
+  .col-md-9.col-12 {
+    padding: 0px;
+  }
+
+  input.form-control.btn.btn-link{
+    text-decoration: none;
+    color: #0a1628;
+  }
+
+  input.form-control.btn:hover{
+    background-color: #8555ff17
+  }
+
+  input.form-control.btn:active, input.form-control.btn:focus{
+    background-color: #8655ff !important;
+    box-shadow: 0 0 0 .25rem #8555ff17;
+    outline: 2px solid #8655ff
+  }
+
+  
+
+
+  ul {
+    margin-left: 10px;
+  }
+
+  p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    margin-bottom: 0px !important;
+    font-weight: bold;
+  }
+
+  #myModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .myBtn {
+    display: none;
+  }
+
+  .myBtn {
+    display: none;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    div#map {
+      order: 2
+    }
+
+    div#meta {
+      order: 1
+    }
+
+    #map {
+      height: 1000px !important;
+    }
+
+    #myModal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .row>.col>nav>.collapse>ul {
+      margin: 0px !important;
+    }
+
+    .row>.col>nav>.collapse>a {
+      margin-top: 10px !important;
+      padding: 0px !important;
+    }
+
+    #myBtn {
+      margin: auto;
+      display: none;
+      position: fixed;
+      bottom: 14px;
+      right: 20%;
+      left: 20%;
+      text-align: center;
+
+
+      width: auto;
+      z-index: 99;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      background-color: rgb(101, 41, 147);
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    #myBtn:hover {
+      background-color: rgb(101, 41, 147);
+    }
+
+  }
+
+
+  <!-- Styling for the Walkthrough-->
+
+.introjs-button:hover, .introjs-button:focus,
+.introjs-button:active {
+    font-size: 12px;
+    background-color: #a079e8 !important;
+    border-color:  #a079e8 !important;
+    color: white !important;
+    text-shadow: none;
+    border-radius: 4px;
+    box-shadow: none
+  }
+
+  a.introjs-button{
+    font-size: 12px;
+    background-color: #0a1628;
+    border-color:  #0a1628;
+    color: white !important;
+    text-shadow: none;
+    border-radius: 4px;
+  }
+
+  .introjs-progressbar {
+    background-color: #a079e8 !important;
+  }
+
+  .introjs-tooltip {
+    min-width: 300px !important;
+  }
+</style>
+
+
+{% extends "base.html" %}
+<!-- this replaces the block called "title" in base.html -->
+{% block title %} Map {% endblock %}
+<!-- this replaces the block called "content" in base.html -->
+{% block content %}
+<!---action="{{ url_for('views.map') }}-->
+
+
+<div class ="container-fluid d-flex flex-column vh-100 mh-100 vw-100 overflow-hidden" >
+
+
+  <div class="row">
+    <div class="col">
+      <nav class="navbar navbar-expand-lg navbar-dark" id="main" >
+
+        <a class="navbar-brand" href="#">
+        <i class="fa fa-map-marker" aria-hidden="true" style="color: #ffffff;"></i> LocVal
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown01"
+          aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
+          style="outline-color:#fff">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!--dropdown item of menu-->
+
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Zeitfilter
+              </a>
+            <ul class="dropdown-menu" >
+              {% for date in df_metadata['time'] %}
+              <li>
+                  <form method="POST" action="/map/">
+                    <input type="submit" class="form-control btn btn-link" value={{date}} name="date">
+                  </form>
+              </li>
+              {% endfor %}
+            </ul>
+            </li>
+
+
+
+            <li>
+              <a> <!--data-bs-toggle="modal" data-bs-target="#myModal"-->
+                <button class=" btn btn-light" onclick="window.location.href=HOST + '/survey_part2/'" name="survey_button"
+                  type="button"  id="survey_button" 
+                  style="background-color: #8655ff; color: #fff; border-color: #8655ff; display:none"> <!--; display:none;-->
+                  Zur Umfrage! </button>
+              </a>
+            </li>
+
+          </ul>
+
+          {%if current_user.is_authenticated%}
+
+
+          <!--Form item of menu for search purpose-->
+          <a class="ms-auto navbar-nav">
+            <p style="font-size: larger; color: rgba(255,255,255,.55)">Hallo, {{current_user.username}}!</p>
+            <a class="nav-item nav-link " id="logout" href="/logout/"
+              style="color: #8655ff; font-weight: bold; font-size: larger;">Logout</a>
+          </a>
+
+
+          {% endif %}
+
+        </div>
+
+
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Studie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Bitte nehmen Sie jetzt an unserer Umfrage teil.
+
+                Wenn Sie Ihre Standortdaten weiter erforschen möchten, können Sie auch zu einem späteren Zeitpunkt teilnehmen.
+                Klicken Sie einfach auf die Schaltfläche oben!<br>
+
+                <strong style="color: #573b8a;">Bitte</strong>
+
+                Stellen Sie sicher, dass sie am letzten Teil der Umfrage teilnehmen, um das Experiment erfolgreich abzuschließen.<br>
+
+                Nachdem Sie den zweiten Teil der Umfrage abgeschlossen haben, werden Sie auf diese Seite zurückgeleitet.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href=HOST+'/survey_part2/'"
+                  style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Jetzt zur Umfrage!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </nav>
+    </div>
+  </div>
+
+
+  <div class="row flex-grow-1 overflow-hidden"> <!--style="height: 93%;" -->
+
+
+
+    <div class="col-xl-9 col-md-8 col-12 mh-100 overflow-auto" id="map" >
+      <!--{{map |safe}}-->
+      <iframe class="displaymap", id="mapFrame", src="{{url_for('views.map1', random_number = random_number)}}" height="100%" width="100%" frameborder="0"
+        seamless="seamless"></iframe>
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
+    </div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Back to Aggregated Information</button>
+
+
+
+    <div class="col-xl-3 col-md-4 col-12 mh-100 overflow-auto" style="height: 100%; overflow-y:auto; padding:0px" id="meta">
+      <div class="metacard">
+        <div class="metaheader">
+          <h2 id="offcanvasRightLabel" style="color: white; text-align:center; font-weight:bold; margin:20px; letter-spacing:.04em">Ihre persönlichen Standortdaten</h2>
+          <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+              onclick="closeMeta()"></button> -->
+        </div>
+
+        <p style="color: white; text-align:center">
+          <!-----
+          In the following you can see additional information which can be inferred based on your
+          location information:</p>-->
+        <p style="text-align: center;">&nbsp;</p>
+
+
+        <div class="card" style="margin-top:30px">
+          <div class="card-body">
+            <h5 class="card-title">Ihre Orte</h5>
+            <p class="card-text">
+              <table style=" color:#898f98">
+                <tbody>
+                  <tr>
+                    <td>
+                      Insgesamt haben Sie <strong> {{df_metadata['stops'][0]}}</strong> Standorte besucht
+                    </td>
+                    <td>
+                      Darunter waren <strong>{{df_metadata['total unique locations'][0]}}</strong> unterschiedliche Standorte 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </p>
+          </div>
+        </div>
+
+
+        <div class="card" style="margin-top:30px">
+          <div class="card-body">
+            <h5 class="card-title">Strecken </h5>
+            <p class="card-text">
+              <table cellspacing="10px" style="border-spacing: 10px; color:#898f98">
+                <tbody>
+                  <tr>
+                    <td>
+                      Insgesamt haben Sie <strong>{{215}} km</strong> zurückgelegt,
+                      wofür Sie <strong>{{35}}</strong> Stunden gebraucht haben.
+                      </td>
+                    <td>
+                      Ihre durchschnittliche Streckenlänge betrug <strong>{{7}} km</strong>.<br> 
+                      Die durchschnittliche Streckendauer betrug <strong>{{35}}</strong> min.
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:30px; height:23vh; min-height: 200px ">
+          <div class="card-body">
+            <h5 class="card-title">Aktivität</h5>
+            <p class="card-text">
+           </p>
+            <iframe frameborder='0' noresize='noresize' style='position: relative; background: transparent;width:100%; height: 90%' src="{{ trip_chart }}" frameborder="0"></iframe>
+          </div>
+        </div>
+
+
+        <div class="card" style="margin-top:30px; height:23vh; min-height: 200px ">
+          <div class="card-body">
+            <h5 class="card-title">Zeitnutzung</h5>
+            <p class="card-text">
+           </p>
+            <iframe frameborder='0' noresize='resize' style='position: relative; background: transparent;width:100%; height: 90%' src="{{ poi_chart }}" frameborder="0"></iframe>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<script src=" https://cdn.jsdelivr.net/npm/intro.js@7.0.1/intro.min.js "></script>
+<script>
+
+  const intro = introJs();
+
+
+  intro.setOptions({
+      exitOnOverlayClick: false,
+      showProgress: true,
+      nextLabel: 'Weiter',
+      prevLabel: 'Zurück',
+      doneLabel: 'Fertig!',
+  
+      steps: [
+          {
+            intro: '<b>Willkommen bei LocVal (Dem "Wert von Daten" - Experiment)</b><br><br> Auf dieser Webseite sehen Sie alle Informationen, die wir aus Ihren Standortdaten analysiert haben.'
+          },
+          {
+            element: '#map',
+            intro: '<b>Karte</b><br><br> Auf dieser Karte sehen Sie eine Visualisierung Ihrer zurückgelegten Routen und Ihrer Standorte.'
+          },
+          {
+            element: '#map', 
+            intro: '<b>Standorte</b><br><br> Klicken Sie auf eine Standortmarkierung, um genauere Informationen zu Ihrem Besuch zu erhalten.'
+          },
+          {
+            element: '#map', 
+            intro: '<b>Datentypen</b><br><br> Wir haben Ihre Standorte nach Datentypen klassifiziert. Diese können Sie auf der Legende unten rechts sehen.<br><br> <b>Wohnort</b>: Der Ort, an dem Sie die meiste Zeit verbracht haben<br> <b>Beruf</b>: Ihre Arbeitsstätte, aber auch Bildungsstätten (z.B. Bilbiotheken, Universitäten) <br> <b>Freizeit</b>: Freizeitakivitäten, Parks, Restaurants <br> <b>Körperliche Betätigung</b> Sport & Gesundheit <br> <b>Einkaufen</b>: Besuchte Einkaufsläden <br> <b>Fortbewegung</b>: Ihre Strecken '
+          },
+          {
+            element: '#navbarDropdown',
+            intro: '<b>Zeitfilter</b><br><br> Filtern Sie die Karte nach einem bestimmten Tag. Klicken Sie erneut auf die Standortmarkierungen für detaillierte Informationen.'
+          },
+          {
+            element: '#meta',
+            intro: '<b>Metadaten</b><br><br> Hier sehen Sie eine Analyse Ihrer Standortdaten'
+          },
+          {
+            element: '#navbarDropdown',
+            intro: '<b>Studie</b><br><br>Nach Ablauf des Timers (1min) erscheint in der Navigationsbar eine Schaltfläche, die Sie zur Umfrage leitet. Nur wenn Sie diese erfolgreich ausfüllen, haben Sie erfolgreich am Experiment teilgenommen.'
+          }
+      ]
+
+      
+  })
+  
+  // document.querySelector('.help').addEventListener('click', function(){
+  //     intro.start();
+  // })
+
+  window.addEventListener('load', function () {
+       var doneTour = sessionStorage.getItem('EventTour') === 'Completed';
+       if (doneTour) {
+           return;
+       }
+       else {
+           intro.start()
+  
+           intro.oncomplete(function () {
+               sessionStorage.setItem('EventTour', 'Completed');
+           });
+  
+           intro.onexit(function () {
+               sessionStorage.setItem('EventTour', 'Completed');
+           });
+       }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+
+  var is_modal_show = sessionStorage.getItem('alreadyShow');
+
+  if (is_modal_show == 'already shown') {
+    const survey_button = document.getElementById('survey_button');
+    survey_button.style.display = 'block';
+    survey_button.setAttribute("aria-disabled", "false");
+  } else {
+
+    setTimeout(() => {
+
+      if (is_modal_show != 'already shown') {
+        $('#myModal').modal('show')
+        sessionStorage.setItem('alreadyShow', 'already shown');
+        console.log("modal was shown");
+        const survey_button = document.getElementById('survey_button')
+        survey_button.style.display = 'block';
+        survey_button.setAttribute("aria-disabled", "false");
+        console.log("button appears");
+      }
+    }, 60000); //1min
+  }
+
+</script>
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () { scrollFunction() };
+  mybutton.style.display = "none"
+  function scrollFunction() {
+    if (((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) && ($(window).width() < 768)) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () { scrollFunction() };
+  mybutton.style.display = "none"
+  function scrollFunction() {
+    if (((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) && ($(window).width() < 700)) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- 
+<script>
+  function openMeta() {
+    if (document.getElementById("karte").style.marginRight == "30%") {
+      document.getElementById("karte").style.marginRight = "0px";
+    } else {
+      document.getElementById("karte").style.marginRight = "30%";
+    }
+  }
+
+  function closeMeta() {
+    document.getElementById("karte").style.marginRight = "0px";
+  }
+</script> -->
+{% if true %}
+<p>{{foo}}</p>
+<!--<div>{{ map }}</div>-->
+{% endif %}
+{% endblock %}
