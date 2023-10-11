@@ -6,7 +6,7 @@ Sie ist die Weiterentwicklung eines Studienprojektes [¹]
 
 
 
-[¹}: [a link] (https://github.com/DamianAtlass/LocTrace/)
+[¹]: https://github.com/DamianAtlass/LocTrace/
 
 
 ## Projekt Starten
